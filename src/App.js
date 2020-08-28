@@ -1,26 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
 
-function App() {
+import "./index.css";
+import Nav from "./Nav";
+import ItemsTable from "./ItemsTable";
+import CartTable from "./CartTable";
+
+export default function App() {
+  const [selectedTab, setSelectedTab] = useState("items");
+
+  const handleSelectTab = (tab) => {
+    console.log(tab);
+    setSelectedTab(tab);
+    return undefined;
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <Nav onSelectTab={handleSelectTab} />
+
+      {selectedTab === "items" ? <ItemsTable /> : <CartTable />}
     </div>
   );
 }
-
-export default App;
